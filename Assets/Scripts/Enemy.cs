@@ -6,13 +6,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 4f;
+    private float _speed = 4.0f;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        transform.position = new Vector3(Random.Range(-10f, 10f), 7, 0);
+        transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
 
     }
 
@@ -28,8 +28,39 @@ public class Enemy : MonoBehaviour
 
         if (transform.position.y < -5.5f)
         {
-            transform.position = new Vector3(Random.Range(-10f, 10f), 7, 0);
+            float randomX = Random.Range(-8.0f, 8.0f);
+            transform.position = new Vector3(randomX, 7, 0);
         }
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if other is Player
+        //damage the player
+        //Destroy Us
+
+        //if other is laser
+        //laser
+        //destroy us
+
+        if (other.tag == "Player") 
+        {
+            Player player = other.transform.GetComponent<Player>();
+            
+            if (player != null ) 
+            {
+                player.Damage();
+            }
+
+            Destroy(this.gameObject);
+        }
+
+        if (other.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
+
 }
