@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _lives = _lives - 1;
+        _lives--;
 
         if (_lives < 1)
         {
