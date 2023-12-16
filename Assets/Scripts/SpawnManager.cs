@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _enemyPrefab;
-    [SerializeField]
-    private GameObject _enemyContainer;
+    
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private bool _stopSpawning = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +21,10 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    //spawn game objects every 5 seconds
-    //create a corcoutine of type IEnumerator -- Yield Events
-    //while loop 
-
     IEnumerator SpawnRoutine()
     {
 
-        while (true)
+        while (_stopSpawning == false)
         {
             
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
@@ -37,10 +34,11 @@ public class SpawnManager : MonoBehaviour
 
         }
 
-        //while loop (infinite loop)
-            //Instantiate enemy prefab
-            //yield wait for 5 seconds
+    }
 
+    public void OnPlayerDeath()
+    {
+        _stopSpawning = true;
     }
 
 }
