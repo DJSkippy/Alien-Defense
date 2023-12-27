@@ -16,7 +16,7 @@ public class Laser : MonoBehaviour
 
         if (transform.position.y > 7)
         {
-        Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

@@ -12,8 +12,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
 
-        transform.position = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
-
     }
 
     // Update is called once per frame
@@ -30,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
      
         if (other.tag == "Player") 

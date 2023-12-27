@@ -1,21 +1,25 @@
 ﻿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 6.9f;
+    [SerializeField] private float _speed = 5f;
     [SerializeField] private GameObject _laserPrefab;
-    private float _fireRate = 0.25f;
+    [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private float _fireRate = 0.25f;
     private float _canFire = -1.0f;
     [SerializeField] private int _lives = 3;
     [SerializeField] private SpawnManager _spawnManager;
-        
+    [SerializeField] private bool _tripleShotActive = false;
+    //variable for is TripleShotActive
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
 
@@ -33,13 +37,14 @@ public class Player : MonoBehaviour
         CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
-        { 
+        {
             FireLaser();
         }
     }
-        void CalculateMovement()
+
+    void CalculateMovement()
     {
-        
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -63,8 +68,24 @@ public class Player : MonoBehaviour
     {
 
         _canFire = Time.time + _fireRate;
-        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
-        
+       
+        //if space key press
+        //if tripleshotActive is true
+        //fire 3 lasers (triple shot prefab)
+
+        //else fire 1 laser
+
+        //Instantiate 3 lasers (triple shot prefab)
+
+        if (_tripleShotActive == true)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+        }
+
     }
 
     public void Damage()
