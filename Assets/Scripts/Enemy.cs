@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         {
             Player player = other.transform.GetComponent<Player>();
             
-            if (player != null ) 
+            if (player != null) 
             {
                 player.Damage();
             }

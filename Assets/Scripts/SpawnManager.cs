@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    
+
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _enemyContainer;
+    [SerializeField] private GameObject _triple_Shot_PowerupPrefab;
     [SerializeField] private bool _stopSpawning = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnRoutine()); 
+        StartCoroutine(SpawnEnemyRoutine());
+        StartCoroutine(SpawnPowerupRoutine());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    IEnumerator SpawnRoutine()
+    IEnumerator SpawnEnemyRoutine()
     {
 
         while (_stopSpawning == false)
         {
-            
+
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
@@ -36,8 +38,21 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    IEnumerator SpawnPowerupRoutine()
+    {
+        
+        //every 3-7 seconds, spawn a powerup
+        while (_stopSpawning == false)
+        {
+            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+            GameObject newPowerup = Instantiate(_triple_Shot_PowerupPrefab, posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(3f, 7f)); 
+        }
+    }
+
     public void OnPlayerDeath()
     {
+        
         _stopSpawning = true;
 
     }
