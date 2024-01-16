@@ -5,8 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
 
-    [SerializeField]
-    private float _speed = 8.0f;
+    [SerializeField] private float _speed = 8.0f;
 
     // Update is called once per frame
     void Update()
@@ -16,8 +15,6 @@ public class Laser : MonoBehaviour
 
         if (transform.position.y > 7)
         {
-            //check if this object has a parent.
-            //destroy the parent too!
             if (transform.parent != null)
             {
                 Destroy(transform.parent.gameObject);

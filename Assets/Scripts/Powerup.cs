@@ -6,7 +6,8 @@ public class Powerup : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
     [SerializeField] private Player _TripleShotActive;
-    //[SerializeField] private bool _stopSpawning = false;
+    [SerializeField] private Player _SpedBoostActive;
+    [SerializeField] private int powerupID;
 
     // Start is called before the first frame update
     void Start()
@@ -19,17 +20,6 @@ public class Powerup : MonoBehaviour
     {
 
         transform.Translate(_speed * Time.deltaTime * Vector3.down);
-        
-        //while (_stopSpawning == false)
-        {
-
-            //Vector3 posToSpawn = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
-            //GameObject newPowerup = Instantiate(_triple_Shot_PowerupPrefab, posToSpawn, Quaternion.identity);
-            
-            //float randomX = Random.Range(-8.0f, 8.0f);
-            //transform.position = new Vector3(randomX, 7, 0);
-
-        }
 
         if (transform.position.y < -5.5f)
         {
@@ -47,8 +37,22 @@ public class Powerup : MonoBehaviour
             Player player = other.transform.GetComponent<Player>();
             
             if (player != null)
-            {
-                player.TripleShotActive();
+            { 
+                switch (powerupID)
+                {
+                    case 0:
+                        player.TripleShotActive();
+                        break;
+                    case 1:
+                        player.SpeedBoostActive();
+                        break;
+                    case 2:
+                        player.ShieldsActive();
+                        break;
+                    default:
+                        Debug.Log("Default Value");
+                        break;
+                }
             }
 
             Destroy(this.gameObject);
