@@ -6,19 +6,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float _speed = 3.5f;
-    [SerializeField] private float _speedBoost = 5f;
-    [SerializeField] private GameObject _laserPrefab;
-    [SerializeField] private GameObject _tripleShotPrefab;
-    [SerializeField] private float _fireRate = 0.25f;
-    [SerializeField] private float _canFire = -1.0f;
-    [SerializeField] private int _lives = 3;
-    private SpawnManager _spawnManager;
     [SerializeField] private bool _isTripleShotActive = false;
     [SerializeField] private bool _isSpeedBoostActive = false;
     [SerializeField] private bool _isShieldsActive = false;
-    [SerializeField] private GameObject _shieldsVisualizer;
+    [SerializeField] private float _speed = 3.5f;
+    [SerializeField] private float _speedBoost = 5f;
+    [SerializeField] private float _fireRate = 0.25f;
+    [SerializeField] private float _canFire = -1.0f;
+    [SerializeField] private int _lives = 3;
     [SerializeField] private int _score;
+    [SerializeField] private GameObject _laserPrefab;
+    [SerializeField] private GameObject _tripleShotPrefab;
+    [SerializeField] private GameObject _shieldsVisualizer;
+    [SerializeField] private GameObject _leftEngine;
+    [SerializeField] private GameObject _rightEngine;
+    private SpawnManager _spawnManager;
     private UIManager _uiManager;
         
     //Start is called before the first frame update
@@ -103,6 +105,18 @@ public class Player : MonoBehaviour
         }
 
         _lives--;
+
+       //random?
+
+        if (_lives == 2)
+        {
+            _rightEngine.SetActive(true);
+        }
+        else if (_lives == 1)
+        {
+            _leftEngine.SetActive(true);
+        }
+        
 
         _uiManager.UpdateLives(_lives);
 

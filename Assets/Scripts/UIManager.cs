@@ -8,12 +8,12 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 
-    [SerializeField] private Text _scoreText;
-    private int _score;
     [SerializeField] private Image _livesImg;
+    [SerializeField] private Sprite[] _liveSprites;
+    [SerializeField] private Text _scoreText;
     [SerializeField] private Text _gameOverText;
     [SerializeField] private Text _restartText;
-    [SerializeField] private Sprite[] _liveSprites;
+    private int _score;
     private GameManager _gameManager;
     
         

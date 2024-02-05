@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private float _speed = 4.0f;
+    [SerializeField] private float _speed = 4.0f;
     private UIManager _uIManager;
     private Player _player;
     private Animator _anim;
-    //handle to animator component
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +18,14 @@ public class Enemy : MonoBehaviour
                 
         if ( _player == null)
         {
-            Debug.LogError("The Player is NULL.");
+            Debug.LogError("The Player is NULL!");
         }
         
         _anim = GetComponent<Animator>();
 
         if ( _anim == null )
         {
-            Debug.LogError("Animator is NULL.");
+            Debug.LogError("Animator is NULL!");
         }
     }
 
@@ -50,13 +48,12 @@ public class Enemy : MonoBehaviour
      
         if (other.tag == "Player") 
         {
-            Player player = other.transform.GetComponent<Player>();
-            
-            if (player != null) 
+                        
+            if (_player != null) 
             {
-                player.Damage();
+                _player.Damage();
             }
-            //trigger anim
+            
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
             Destroy(this.gameObject, 2.35f);
@@ -70,8 +67,9 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-            //triiger anim
+            
             _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
             Destroy(this.gameObject, 2.35f);
         }
     }

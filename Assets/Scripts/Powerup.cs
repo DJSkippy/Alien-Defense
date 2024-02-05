@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
+    [SerializeField] private int powerupID;
     [SerializeField] private float _speed = 3.0f;
     [SerializeField] private Player _TripleShotActive;
     [SerializeField] private Player _SpedBoostActive;
-    [SerializeField] private int powerupID;
-
+    
     // Start is called before the first frame update
     void Start()
     {
