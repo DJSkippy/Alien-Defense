@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float _canFire = -1.0f;
     [SerializeField] private int _lives = 3;
     [SerializeField] private int _score;
+    [SerializeField] private AudioClip _laserSoundClip;
+    [SerializeField] private AudioClip _explosionSoundClip;
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
     [SerializeField] private GameObject _shieldsVisualizer;
@@ -22,6 +25,8 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _rightEngine;
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
+    
+    //variable to store the audio clip
         
     //Start is called before the first frame update
     void Start()
@@ -30,17 +35,26 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
         {
-            Debug.LogError("The Spawn manager is NULL.");
+            Debug.LogError("The Spawn manager is NULL!");
         }
 
         if (_uiManager == null)
         {
-            Debug.LogError("The UI Manager is NULL.");
+            Debug.LogError("The UI Manager is NULL!");
         }
 
+        if ( _audioSource == null)
+        {
+            Debug.LogError("The AudioSource on the player is NULL!");
+        }
+        else
+        {
+            _audioSource.clip = _laserSoundClip;
+        }
     }
 
     //Update is called once per frame
@@ -91,6 +105,9 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
         }
+
+        _audioSource.Play();
+        //play the laser audio clip
 
     }
 

@@ -8,6 +8,7 @@ public class Powerup : MonoBehaviour
     [SerializeField] private float _speed = 3.0f;
     [SerializeField] private Player _TripleShotActive;
     [SerializeField] private Player _SpedBoostActive;
+    [SerializeField] private Player _ShieldsActive;
     
     // Start is called before the first frame update
     void Start()
