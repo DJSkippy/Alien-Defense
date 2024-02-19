@@ -6,9 +6,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 4.0f;
-    [SerializeField] private AudioClip _explosionSoundClip;
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameObject _explosionPrefab;
+    [SerializeField] private AudioSource _audioSource;
     private UIManager _uIManager;
     private Player _player;
     private Animator _anim;
@@ -19,7 +18,7 @@ public class Enemy : MonoBehaviour
         _uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _player = GameObject.Find("Player").GetComponent<Player>();
         _audioSource = GetComponent<AudioSource>();
-
+        
         if ( _player == null)
         {
             Debug.LogError("The Player is NULL!");
@@ -32,13 +31,9 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Animator is NULL!");
         }
 
-        if (_audioSource == null)
+        if ( _audioSource == null )
         {
-            Debug.LogError("The AudioSource on the player is NULL!");
-        }
-        else
-        {
-            _audioSource.clip = _explosionSoundClip;
+            Debug.LogError("Enemy Audio Source is NULL!");
         }
 
     }
@@ -70,8 +65,8 @@ public class Enemy : MonoBehaviour
             
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            Destroy(this.gameObject, 2.35f);
             _audioSource.Play();
+            Destroy(this.gameObject, 2.35f);
         }
 
         if (other.tag == "Laser")
@@ -85,9 +80,10 @@ public class Enemy : MonoBehaviour
             
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            Destroy(this.gameObject, 2.35f);
             _audioSource.Play();
+            Destroy(this.gameObject, 2.35f);
         }
+
     }
 
 }

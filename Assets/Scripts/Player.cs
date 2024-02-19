@@ -16,7 +16,6 @@ public class Player : MonoBehaviour
     [SerializeField] private int _lives = 3;
     [SerializeField] private int _score;
     [SerializeField] private AudioClip _laserSoundClip;
-    [SerializeField] private AudioClip _explosionSoundClip;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private GameObject _tripleShotPrefab;
@@ -25,9 +24,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _rightEngine;
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
-    
-    //variable to store the audio clip
-        
+                
     //Start is called before the first frame update
     void Start()
     {
@@ -107,8 +104,7 @@ public class Player : MonoBehaviour
         }
 
         _audioSource.Play();
-        //play the laser audio clip
-
+    
     }
 
     public void Damage()

@@ -174,9 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupID: 2
   _speed: 3
-  _TripleShotActive: {fileID: 0}
-  _SpedBoostActive: {fileID: 0}
-  _ShieldsActive: {fileID: 0}
+  _clip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!95 &6163118752989024846
 Animator:
   serializedVersion: 5
