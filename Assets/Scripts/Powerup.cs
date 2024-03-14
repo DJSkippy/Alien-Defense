@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
-    [SerializeField] private int powerupID;
+    [SerializeField] private int powerUpID;
     [SerializeField] private float _speed = 3.0f;
     private Player _TripleShotActive;
     private Player _SpedBoostActive;
@@ -37,7 +37,7 @@ public class Powerup : MonoBehaviour
                         
             if (player != null)
             { 
-                switch (powerupID)
+                switch (powerUpID)
                 {
                     case 0:
                         player.TripleShotActive();

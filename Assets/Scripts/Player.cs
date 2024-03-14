@@ -2,15 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private bool _isTripleShotActive = false;
     [SerializeField] private bool _isSpeedBoostActive = false;
     [SerializeField] private bool _isShieldsActive = false;
-    [SerializeField] private float _speed = 3.5f;
+    [SerializeField] private float _speed = 5f;
     [SerializeField] private float _speedBoost = 5f;
+    [SerializeField] private Slider slider;
+    [SerializeField] private float _startBoost = 0;
     [SerializeField] private float _fireRate = 0.25f;
     [SerializeField] private float _canFire = -1.0f;
     [SerializeField] private int _lives = 3;
@@ -33,6 +37,7 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        slider = gameObject.GetComponent<Slider>();
 
         if (_spawnManager == null)
         {
@@ -65,6 +70,11 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            SpeedBoostActive();
+        } 
+
     }
 
     void CalculateMovement()
@@ -87,6 +97,14 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(11.25f, transform.position.y, 0);
         }
 
+        if (_isSpeedBoostActive == true)
+        {
+            transform.Translate(direction * (_speed + _speedBoost) * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(direction * _speed * Time.deltaTime);
+        }
     }
 
     void FireLaser()
@@ -141,6 +159,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetBoost(int newBoost)
+    {
+        _isSpeedBoostActive = true;
+        _startBoost = slider.value += newBoost;
+    }
+
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
@@ -156,8 +180,7 @@ public class Player : MonoBehaviour
     public void SpeedBoostActive()
     {
         _isSpeedBoostActive = true;
-        _speed += _speedBoost;
-        StartCoroutine(SpeedBoostPowerDownRountine());
+        //StartCoroutine(SpeedBoostPowerDownRountine());
     }
 
     IEnumerator SpeedBoostPowerDownRountine()
